@@ -1,11 +1,14 @@
 import { LightningElement, api, wire } from 'lwc';
 import { getObjectInfo, getPicklistValues } from 'lightning/uiObjectInfoApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
-
 import LOYALTY_MEMBER_OBJECT from '@salesforce/schema/LoyaltyProgramMember';
 import SEGMENT_FIELD from '@salesforce/schema/LoyaltyProgramMember.Segment__c';
-
-import updateMemberSegment from '@salesforce/apex/Member360Controller.updateMemberSegment';
+import LANGUAGE_FIELD from '@salesforce/schema/LoyaltyProgramMember.Preferred_Language__c';
+import CHANNEL_FIELD from '@salesforce/schema/LoyaltyProgramMember.Preferred_Channel__c';
+import NATIONALITY_FIELD from '@salesforce/schema/LoyaltyProgramMember.Nationality__c';
+import PROPERTY_FIELD from '@salesforce/schema/LoyaltyProgramMember.Property__c';
+import PREFERRED_GAME_FIELD from '@salesforce/schema/LoyaltyProgramMember.Preferred_Game__c';
+import updateMemberProfile from '@salesforce/apex/Member360Controller.updateMemberProfile';
 
 export default class MemberSummaryCards extends LightningElement {
     @api member;
@@ -22,6 +25,16 @@ export default class MemberSummaryCards extends LightningElement {
 
     @wire(getPicklistValues, {
         recordTypeId: '$objectInfo.data.defaultRecordTypeId',
+        fieldApiName: PREFERRED_GAME_FIELD
+    })
+    wiredPreferredGamePicklist;
+
+    get preferredGameOptions() {
+        return this.wiredPreferredGamePicklist?.data?.values || [];
+    }
+
+    @wire(getPicklistValues, {
+        recordTypeId: '$objectInfo.data.defaultRecordTypeId',
         fieldApiName: SEGMENT_FIELD
     })
     wiredSegmentPicklist;
@@ -30,10 +43,48 @@ export default class MemberSummaryCards extends LightningElement {
         return this.wiredSegmentPicklist?.data?.values || [];
     }
 
+    @wire(getPicklistValues, {
+        recordTypeId: '$objectInfo.data.defaultRecordTypeId',
+        fieldApiName: LANGUAGE_FIELD
+    })
+    wiredLanguagePicklist;
+
+    get languageOptions() {
+        return this.wiredLanguagePicklist?.data?.values || [];
+    }
+
+    @wire(getPicklistValues, {
+        recordTypeId: '$objectInfo.data.defaultRecordTypeId',
+        fieldApiName: CHANNEL_FIELD
+    })
+    wiredChannelPicklist;
+
+    get channelOptions() {
+        return this.wiredChannelPicklist?.data?.values || [];
+    }
+
+    @wire(getPicklistValues, {
+        recordTypeId: '$objectInfo.data.defaultRecordTypeId',
+        fieldApiName: NATIONALITY_FIELD
+    })
+    wiredNationalityPicklist;
+
+    get nationalityOptions() {
+        return this.wiredNationalityPicklist?.data?.values || [];
+    }
+
+    @wire(getPicklistValues, {
+        recordTypeId: '$objectInfo.data.defaultRecordTypeId',
+        fieldApiName: PROPERTY_FIELD
+    })
+    wiredPropertyPicklist;
+
+    get propertyOptions() {
+        return this.wiredPropertyPicklist?.data?.values || [];
+    }
+
     get segmentClass() {
-        const segment = (this.member?.Segment__c || '')
-            .trim()
-            .toLowerCase();
+        const segment = (this.member?.Segment__c || '').trim().toLowerCase();
 
         switch (segment) {
             case 'basic':
@@ -58,8 +109,17 @@ export default class MemberSummaryCards extends LightningElement {
         this.isProfileEdit = true;
         this.modalTitle = 'Edit Member Profile';
 
+        const preferredChannel = this.member?.Preferred_Channel__c
+            ? this.member.Preferred_Channel__c.split(';').map(value => value.trim()).filter(value => value)
+            : [];
+
         this.editData = {
-            gamingSegment: this.member?.Segment__c || ''
+            gamingSegment: this.member?.Segment__c || '',
+            preferredLanguage: this.member?.Preferred_Language__c || '',
+            preferredChannel,
+            nationality: this.member?.Nationality__c || '',
+            property: this.member?.Property__c || '',
+            preferredGame: this.member?.Preferred_Game__c || ''
         };
     }
 
@@ -72,17 +132,33 @@ export default class MemberSummaryCards extends LightningElement {
         };
     }
 
+    handleChannelChange(event) {
+        this.editData = {
+            ...this.editData,
+            preferredChannel: event.detail.value
+        };
+    }
+
     async handleSave() {
         try {
-            await updateMemberSegment({
+            const preferredChannel = Array.isArray(this.editData.preferredChannel)
+                ? this.editData.preferredChannel.join(';')
+                : this.editData.preferredChannel || '';
+
+            await updateMemberProfile({
                 memberId: this.member.Id,
-                segment: this.editData.gamingSegment
+                segment: this.editData.gamingSegment,
+                preferredLanguage: this.editData.preferredLanguage,
+                preferredChannel,
+                nationality: this.editData.nationality,
+                property: this.editData.property,
+                preferredGame: this.editData.preferredGame
             });
 
             this.dispatchEvent(
                 new ShowToastEvent({
                     title: 'Success',
-                    message: 'Gaming Segment updated successfully.',
+                    message: 'Member Profile updated successfully.',
                     variant: 'success'
                 })
             );
@@ -90,7 +166,12 @@ export default class MemberSummaryCards extends LightningElement {
             this.dispatchEvent(
                 new CustomEvent('segmentchange', {
                     detail: {
-                        segment: this.editData.gamingSegment
+                        segment: this.editData.gamingSegment,
+                        preferredLanguage: this.editData.preferredLanguage,
+                        preferredChannel,
+                        nationality: this.editData.nationality,
+                        property: this.editData.property,
+                        preferredGame: this.editData.preferredGame
                     },
                     bubbles: true,
                     composed: true
@@ -99,7 +180,7 @@ export default class MemberSummaryCards extends LightningElement {
 
             this.closeModal();
         } catch (error) {
-            let message = 'Unable to update Gaming Segment.';
+            let message = 'Unable to update Member Profile.';
 
             if (error?.body?.message) {
                 message = error.body.message;

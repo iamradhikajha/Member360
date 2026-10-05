@@ -11,6 +11,7 @@ export default class Member360 extends LightningElement {
     wiredMember({ data, error }) {
         if (data) {
             this.member = data;
+            console.log('ln14::', data);
             this.error = undefined;
         } else if (error) {
             this.error = error;
@@ -102,9 +103,23 @@ export default class Member360 extends LightningElement {
     }
 
     handleSegmentChange(event) {
+        const {
+            segment,
+            preferredLanguage,
+            preferredChannel,
+            nationality,
+            property,
+            preferredGame
+        } = event.detail;
+
         this.member = {
             ...this.member,
-            Segment__c: event.detail.segment
+            Segment__c: segment,
+            Preferred_Language__c: preferredLanguage,
+            Preferred_Channel__c: preferredChannel,
+            Nationality__c: nationality,
+            Property__c: property,
+            Preferred_Game__c: preferredGame
         };
     }
 }
