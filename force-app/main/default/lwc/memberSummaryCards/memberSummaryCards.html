@@ -1,0 +1,137 @@
+<template>
+    <template if:true={member}>
+        <div class="cardsContainer">
+            <div class="summaryCard">
+                <div class="cardHeader">
+                    <div class="headerLeft">
+                        <div class="headerIcon profileIcon">
+                            <lightning-icon icon-name="standard:contact" alternative-text="Member Profile" size="x-small"></lightning-icon>
+                        </div>
+                        <h2>Member Profile</h2>
+                    </div>
+
+                    <button type="button" class="editButton" data-section="profile" onclick={handleEdit}> Edit</button>
+                </div>
+
+                <div class="cardBody">
+                    <div class="sectionTitle">
+                        Personal Information
+                    </div>
+
+                    <div class="infoGrid">
+                        <div class="infoItem">
+                            <span class="label">Preferred Language</span>
+                            <span class="value">English</span>
+                        </div>
+
+                        <div class="infoItem">
+                            <span class="label">Nationality</span>
+                            <span class="value">Singapore</span>
+                        </div>
+
+                        <div class="infoItem">
+                            <span class="label">Preferred Property</span>
+                            <span class="value">
+                                Resort World Sensota
+                            </span>
+                        </div>
+
+                        <div class="infoItem">
+                            <span class="label">Preferred Channel</span>
+                            <span class="value">
+                                Email,SMS,Whatsapp
+                            </span>
+                        </div>
+                    </div>
+                    <div class="sectionTitle gamingTitle">
+                        Gaming Information
+                    </div>
+                    <div class="gamingGrid">
+                        <div class="infoItem">
+                            <span class="label">
+                                Player Card Number
+                            </span>
+                            <span class="value">
+                                {member.Player_Card_Number__c}
+                            </span>
+                        </div>
+
+                        <div class="infoItem">
+                            <span class="label">
+                                Gaming Segment
+                            </span>
+
+                            <span class={segmentClass}>
+                                {member.Segment__c}
+                            </span>
+                        </div>
+                        <div class="infoItem">
+                            <span class="label">
+                                Host Assigned
+                            </span>
+                            <span class="linkValue">
+                                {member.Owner.Name}
+                            </span>
+                        </div>
+                        <div class="infoItem">
+                            <span class="label">
+                                Preferred Games
+                            </span>
+                            <span class="value">
+                                Slots, Table Games
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="summaryCard">
+                <div class="cardHeader">
+                    <div class="headerLeft">
+                        <div class="headerIcon loyaltyIcon">
+                            <lightning-icon  icon-name="standard:product"  alternative-text="Loyalty Status"  size="x-small"></lightning-icon>
+                        </div>
+                        <h2>Loyalty Status</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summaryCard">
+                <div class="cardHeader">
+                    <div class="headerLeft">
+                        <div class="headerIcon hostIcon">
+                            <lightning-icon icon-name="standard:avatar" alternative-text="Host" size="x-small">
+                            </lightning-icon>
+                        </div>
+                        <h2>Host &amp; Relationship</h2>
+                    </div>
+                    <button type="button" class="editButton"> Edit</button>
+                </div>
+            </div>
+        </div>
+        <template if:true={isModalOpen}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="editModalHeading" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button type="button" class="closeButton" title="Close" onclick={handleCancel}>
+                            <lightning-icon icon-name="utility:close" alternative-text="Close" size="x-small"></lightning-icon>
+                        </button>
+                        <h2 id="editModalHeading" class="modalTitle"> {modalTitle}</h2>
+                    </header>
+
+                    <div class="slds-modal__content modalBody">
+                        <template if:true={isProfileEdit}>
+                            <div class="formGrid">
+                                <lightning-combobox label="Gaming Segment" value={editData.gamingSegment} options={segmentOptions} data-field="gamingSegment" placeholder="Select Gaming Segment" onchange={handleFieldChange}></lightning-combobox>
+                            </div>
+                        </template>
+                    </div>
+                    <footer class="slds-modal__footer modalFooter">
+                        <button type="button" class="cancelButton" onclick={handleCancel}> Cancel </button>
+                        <button type="button" class="saveButton" onclick={handleSave}> Save</button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </template>
+</template>

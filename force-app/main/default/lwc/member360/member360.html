@@ -1,0 +1,94 @@
+<template>
+    <div class="main">
+        <template if:true={member}>
+            <div class="profileHeader">
+                <div class="profileSection">
+                    <div class="circleHandler">
+                        <h1>{memberInitials}</h1>
+                    </div>
+                    <div class="statusBox">
+                        <template if:true={isMerged}>
+                            <span class="mergedStatus">Merged</span>
+                        </template>
+
+                        <template if:false={isMerged}>
+                            <template if:true={isActive}>
+                                <span class="activeStatus">Active</span>
+                            </template>
+
+                            <template if:false={isActive}>
+                                <span class="inactiveStatus">Inactive</span>
+                            </template>
+                        </template>
+                        <h1 class="conName">{member.Contact.Name}</h1>
+                        <p>Member ID</p>
+                        <h1 class="boldClass">{member.MembershipNumber}</h1>
+                    </div>
+                </div>
+                <div class="tierSection">
+                    <div class="tierTop">
+                        <div class="tierIcon">
+                            <lightning-icon icon-name="utility:favorite" size="small" variant="inverse"></lightning-icon>
+                        </div>
+                        <div class="tierInfo">
+                            <h2>CLASSIC TIER</h2>
+                            <div class="stars">
+                                <template for:each={stars} for:item="star">
+                                    <span key={star.id} class={star.className}> ★</span>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tierDetails">
+                        <div class="tierDetail">
+                            <p>Active Since</p>
+                            <h3>{formattedActiveSince}</h3>
+                        </div>
+
+                        <div class="tierDetail playerCardDetail">
+                            <p>Player Card</p>
+                            <h3>{member.MembershipNumber}</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="memberInfoBox">
+                    <div class="infoItem">
+                        <div class="infoIcon gamingIcon">
+                            <lightning-icon icon-name="utility:money" size="x-small" variant="inverse"></lightning-icon>
+                        </div>
+                        <div class="infoText">
+                            <p>Gaming Spend (YTD)</p>
+                            <h2>{gamingSpend}</h2>
+                        </div>
+                    </div>
+                    <div class="infoItem">
+                        <div class="infoIcon visitsIcon">
+                            <lightning-icon icon-name="utility:home" size="x-small" variant="inverse"> </lightning-icon>
+                        </div>
+                        <div class="infoText">
+                            <p>Visits This Year</p>
+                            <h2>18</h2>
+                        </div>
+                    </div>
+                    <div class="infoItem lastVisitItem">
+                        <div class="infoIcon lastVisitIcon">
+                            <lightning-icon icon-name="utility:event" size="x-small" variant="inverse"> </lightning-icon>
+                        </div>
+                        <div class="infoText">
+                            <p>Last Visit</p>
+                            <h2>{formattedLastVisit}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="imageSpace"></div>
+            </div>
+        </template>
+        <template if:true={error}>
+            <p class="slds-text-color_error">
+                Error loading member.
+            </p>
+        </template>
+    </div>
+    <c-member-summary-cards member={member} onsegmentchange={handleSegmentChange}></c-member-summary-cards>
+</template>
