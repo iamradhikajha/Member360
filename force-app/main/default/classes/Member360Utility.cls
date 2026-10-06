@@ -8,6 +8,14 @@ public class Member360Utility {
         }
     }
 
+    public static void validateLoyaltyMemberId(Id memberId) {
+        if (memberId == null) {
+            throw new AuraHandledException(
+                Member360Constants.ERROR_LOYALTY_MEMBER_ID_REQUIRED
+            );
+        }
+    }
+
     public static void validateSegment(String segment) {
         if (String.isBlank(segment)) {
             throw new AuraHandledException(
@@ -26,5 +34,13 @@ public class Member360Utility {
         return new AuraHandledException(
             Member360Constants.ERROR_UPDATE_SEGMENT + e.getMessage()
         );
+    }
+
+    public static void validateHostUserId(Id hostUserId) {
+        if (hostUserId == null) {
+            throw new AuraHandledException(
+                Member360Constants.ERROR_HOST_USER_REQUIRED
+            );
+        }
     }
 }

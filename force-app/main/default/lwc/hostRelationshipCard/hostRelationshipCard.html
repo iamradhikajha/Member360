@@ -1,0 +1,94 @@
+<template>
+    <div class="summaryCard hostSummaryCard">
+        <div class="cardHeader">
+            <div class="headerLeft">
+                <div class="headerIcon hostIcon">
+                    <lightning-icon icon-name="standard:avatar" alternative-text="Host" size="x-small"></lightning-icon>
+                </div>
+                <h2>Host &amp; Relationship</h2>
+            </div>
+            <button type="button" class="editButton" onclick={handleHostEdit}>Edit</button>
+        </div>
+
+        <div class="hostBody">
+            <div class="hostTopSection">
+                <div class="hostImage">
+                    <img src={hostPhotoUrl} alt="Assigned Host" class="hostPhoto" />
+                </div>
+
+                <div class="hostDetails">
+                    <div class="hostDetailItem">
+                        <span class="label">Assigned Host</span>
+                        <span class="hostName">{hostName}</span>
+                    </div>
+
+                    <div class="hostDetailItem">
+                        <span class="label">Last Contact</span>
+                        <lightning-formatted-date-time value={hostLastContact} day="2-digit" month="short" year="numeric" class="hostValue"></lightning-formatted-date-time>
+                    </div>
+
+                    <div class="hostDetailItem">
+                        <span class="label">Preferred Contact</span>
+                        <div class="preferredContact">
+                            <template for:each={preferredContactOptions} for:item="contact">
+                                <span key={contact.value} class="contactItem">
+                                    <span class={contact.iconClass}>{contact.icon}</span>
+                                    <span>{contact.label}</span>
+                                </span>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div class="hostDetailItem">
+                        <span class="label">Next Follow-up</span>
+                        <lightning-formatted-date-time value={hostNextFollowUp} day="2-digit" month="short" year="numeric" class="hostValue"></lightning-formatted-date-time>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hostNotes">
+                <span class="label">Notes</span>
+                <span class="notesValue">{hostNotes}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOST EDIT MODAL -->
+    <template if:true={isHostEditOpen}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="hostEditModalHeading" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button type="button" class="closeButton" title="Close" onclick={closeHostEdit}>
+                        <lightning-icon icon-name="utility:close" alternative-text="Close" size="x-small"></lightning-icon>
+                    </button>
+                    <h2 id="hostEditModalHeading" class="modalTitle">Edit Host &amp; Relationship</h2>
+                </header>
+
+                <div class="slds-modal__content modalBody">
+                    <div class="formGrid">
+                        <lightning-input type="text" label="Assigned Host" value={hostName} disabled></lightning-input>
+
+                        <lightning-input type="date" label="Last Contact" value={hostEditData.lastContact} data-field="lastContact" onchange={handleHostFieldChange}></lightning-input>
+
+                        <lightning-input type="date" label="Next Follow-up" value={hostEditData.nextFollowUp} data-field="nextFollowUp" onchange={handleHostFieldChange}></lightning-input>
+
+                        <lightning-combobox name="hostPreferredContact" label="Preferred Contact" value={hostEditData.preferredContact} options={hostPreferredContactOptions} onchange={handleHostContactChange}></lightning-combobox>
+
+                        <lightning-textarea class="fullWidth" name="hostNotes" label="Notes" value={hostEditData.notes} data-field="notes" onchange={handleHostFieldChange}></lightning-textarea>
+                    </div>
+                </div>
+
+                <footer class="slds-modal__footer modalFooter">
+                    <button type="button" class="cancelButton" onclick={closeHostEdit}>Cancel</button>
+
+                    <button type="button" class="saveButton" onclick={saveHostRelationship} disabled={hostSaving}>
+                        <template if:false={hostSaving}>Save</template>
+                        <template if:true={hostSaving}>Saving...</template>
+                    </button>
+                </footer>
+            </div>
+        </section>
+
+        <div class="slds-backdrop slds-backdrop_open" onclick={handleHostModalOutsideClick}></div>
+    </template>
+</template>

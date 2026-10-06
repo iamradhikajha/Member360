@@ -1,128 +1,20 @@
 <template>
     <template if:true={member}>
+
         <div class="cardsContainer">
-            <div class="summaryCard">
-                <div class="cardHeader">
-                    <div class="headerLeft">
-                        <div class="headerIcon profileIcon">
-                            <lightning-icon icon-name="standard:contact" alternative-text="Member Profile" size="x-small"></lightning-icon>
-                        </div>
-                        <h2>Member Profile</h2>
-                    </div>
-                    <button type="button" class="editButton" data-section="profile" onclick={handleEdit}>Edit</button>
-                </div>
 
-                <div class="cardBody">
-                    <div class="sectionTitle">Personal Information</div>
+            <c-member-profile-card
+                member={member}>
+            </c-member-profile-card>
 
-                    <div class="infoGrid">
-                        <div class="infoItem">
-                            <span class="label">Preferred Language</span>
-                            <span class="value">{member.Preferred_Language__c}</span>
-                        </div>
+            <c-loyalty-status-card
+                member={member}>
+            </c-loyalty-status-card>
 
-                        <div class="infoItem">
-                            <span class="label">Nationality</span>
-                            <span class="value">{member.Nationality__c}</span>
-                        </div>
+            <c-host-relationship-card>
+            </c-host-relationship-card>
 
-                        <div class="infoItem">
-                            <span class="label">Preferred Property</span>
-                            <span class="value">{member.Property__c}</span>
-                        </div>
-
-                        <div class="infoItem">
-                            <span class="label">Preferred Channel</span>
-                            <span class="value">{member.Preferred_Channel__c}</span>
-                        </div>
-                    </div>
-
-                    <div class="sectionTitle gamingTitle">Gaming Information</div>
-
-                    <div class="gamingGrid">
-                        <div class="infoItem">
-                            <span class="label">Player Card Number</span>
-                            <span class="value">{member.Player_Card_Number__c}</span>
-                        </div>
-
-                        <div class="infoItem">
-                            <span class="label">Gaming Segment</span>
-                            <span class={segmentClass}>{member.Segment__c}</span>
-                        </div>
-
-                        <div class="infoItem">
-                            <span class="label">Host Assigned</span>
-                            <span class="linkValue">{member.Owner.Name}</span>
-                        </div>
-
-                        <div class="infoItem">
-                            <span class="label">Preferred Games</span>
-                            <span class="value">{member.Preferred_Game__c}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="summaryCard">
-                <div class="cardHeader">
-                    <div class="headerLeft">
-                        <div class="headerIcon loyaltyIcon">
-                            <lightning-icon icon-name="standard:product" alternative-text="Loyalty Status" size="x-small"></lightning-icon>
-                        </div>
-                        <h2>Loyalty Status</h2>
-                    </div>
-                </div>
-            </div>
-
-            <div class="summaryCard">
-                <div class="cardHeader">
-                    <div class="headerLeft">
-                        <div class="headerIcon hostIcon">
-                            <lightning-icon icon-name="standard:avatar" alternative-text="Host" size="x-small"></lightning-icon>
-                        </div>
-                        <h2>Host &amp; Relationship</h2>
-                    </div>
-                    <button type="button" class="editButton">Edit</button>
-                </div>
-            </div>
         </div>
 
-        <template if:true={isModalOpen}>
-            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="editModalHeading" class="slds-modal slds-fade-in-open">
-                <div class="slds-modal__container">
-                    <header class="slds-modal__header">
-                        <button type="button" class="closeButton" title="Close" onclick={handleCancel}>
-                            <lightning-icon icon-name="utility:close" alternative-text="Close" size="x-small"></lightning-icon>
-                        </button>
-                        <h2 id="editModalHeading" class="modalTitle">{modalTitle}</h2>
-                    </header>
-
-                    <div class="slds-modal__content modalBody">
-                        <template if:true={isProfileEdit}>
-                            <div class="formGrid">
-                                <lightning-combobox label="Preferred Language" value={editData.preferredLanguage} options={languageOptions} data-field="preferredLanguage" placeholder="Select Preferred Language" onchange={handleFieldChange}></lightning-combobox>
-
-                                <lightning-combobox label="Nationality" value={editData.nationality} options={nationalityOptions} data-field="nationality" placeholder="Select Nationality" onchange={handleFieldChange}></lightning-combobox>
-
-                                <lightning-combobox label="Preferred Property" value={editData.property} options={propertyOptions} data-field="property" placeholder="Select Preferred Property" onchange={handleFieldChange}></lightning-combobox>
-
-                                <lightning-combobox label="Preferred Games" value={editData.preferredGame} options={preferredGameOptions} data-field="preferredGame" placeholder="Select Preferred Games" onchange={handleFieldChange}></lightning-combobox>
-
-                                <lightning-dual-listbox name="preferredChannel" label="Preferred Channel" source-label="Available" selected-label="Selected" options={channelOptions} value={editData.preferredChannel} data-field="preferredChannel" onchange={handleChannelChange}></lightning-dual-listbox>
-
-                                <lightning-combobox label="Gaming Segment" value={editData.gamingSegment} options={segmentOptions} data-field="gamingSegment" placeholder="Select Gaming Segment" onchange={handleFieldChange}></lightning-combobox>
-                            </div>
-                        </template>
-                    </div>
-
-                    <footer class="slds-modal__footer modalFooter">
-                        <button type="button" class="cancelButton" onclick={handleCancel}>Cancel</button>
-                        <button type="button" class="saveButton" onclick={handleSave}>Save</button>
-                    </footer>
-                </div>
-            </section>
-
-            <div class="slds-backdrop slds-backdrop_open"></div>
-        </template>
     </template>
 </template>
