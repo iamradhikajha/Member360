@@ -1,255 +1,226 @@
-.summaryCard {
-    background: #ffffff;
-    border: 1px solid #e5e5e5;
-    border-radius: 7px;
-    overflow: hidden;
-    min-width: 0;
-    box-sizing: border-box;
-}
-
-.cardHeader {
-    min-height: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 12px;
-    border-bottom: 1px solid #e8e8e8;
-    box-sizing: border-box;
-}
-
-.headerLeft {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.headerLeft h2 {
-    margin: 0;
-    font-size: 12px;
-    font-weight: 700;
-    color: #181818;
-}
-
-.headerIcon {
-    width: 22px;
-    height: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-}
-
-.profileIcon {
-    background: #eaf4ff;
-}
-
-.editButton {
-    border: 1px solid #d8dde6;
-    background: #ffffff;
-    color: #0176d3;
-    font-size: 9px;
-    padding: 3px 11px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.editButton:hover {
-    background: #f3f9ff;
-    border-color: #0176d3;
-}
-
-.cardBody {
-    padding: 10px 12px;
-    box-sizing: border-box;
-}
-
-.sectionTitle {
-    color: #0176d3;
-    font-size: 9px;
-    font-weight: 700;
-    margin-bottom: 8px;
-}
-
-.gamingTitle {
-    margin-top: 15px;
-}
-
-.infoGrid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    column-gap: 16px;
-    row-gap: 10px;
-}
-
-.infoItem {
-    min-width: 0;
-}
-
-.label {
-    display: block;
-    font-size: 8px;
-    color: #706e6b;
-    margin-bottom: 3px;
-}
-
-.value {
-    display: block;
-    font-size: 9px;
-    color: #181818;
-    font-weight: 500;
-    line-height: 1.35;
-}
-
-.gamingGrid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 10px;
-}
-
-.linkValue {
-    display: block;
-    color: #0176d3;
-    font-size: 9px;
-    font-weight: 500;
-}
-
-.segmentBadge {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-size: 8px;
-    font-weight: 600;
-    line-height: 1.2;
-}
-
-.segmentBadge.Basic {
-    background: #fef3c7;
-    color: #92400e;
-}
-
-.segmentBadge.Premium {
-    background: #ede9fe;
-    color: #6d28d9;
-}
-
-.segmentBadge.VVIP {
-    background: #fee2e2;
-    color: #b91c1c;
-}
-
-.segmentBadge.Business {
-    background: #dcfce7;
-    color: #15803d;
-}
-
-.segmentBadge.default {
-    background: #e5e7eb;
-    color: #374151;
-}
-
-/* Modal */
-
-.slds-modal {
-    z-index: 9001;
-}
-
-.slds-backdrop {
-    z-index: 9000;
-}
-
-.slds-modal__container {
-    width: 90%;
-    max-width: 680px;
-}
-
-.slds-modal__header {
-    position: relative;
-    padding: 16px 20px;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.modalTitle {
-    margin: 0;
-    font-size: 16px;
-    font-weight: 700;
-    text-align: left;
-}
-
-.closeButton {
-    position: absolute;
-    right: 12px;
-    top: 12px;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.closeButton:hover {
-    background: #f3f3f3;
-}
-
-.modalBody {
-    padding: 20px;
-    min-height: 180px;
-    max-height: 65vh;
-    overflow-y: auto;
-}
-
-.formGrid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 18px;
-    row-gap: 14px;
-}
-
-.fullWidth {
-    grid-column: 1 / -1;
-}
-
-.modalFooter {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 20px;
-    border-top: 1px solid #e5e5e5;
-}
-
-.cancelButton {
-    min-width: 80px;
-    height: 34px;
-    padding: 0 16px;
-    background: #ffffff;
-    border: 1px solid #d8dde6;
-    border-radius: 4px;
-    color: #181818;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-.cancelButton:hover {
-    background: #f3f3f3;
-}
-
-.saveButton {
-    min-width: 80px;
-    height: 34px;
-    padding: 0 18px;
-    background: #0176d3;
-    border: 1px solid #0176d3;
-    border-radius: 4px;
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.saveButton:hover {
-    background: #014486;
+.summaryCard { 
+    background: #ffffff; 
+    border: 1px solid #e5e5e5; 
+    border-radius: 7px; 
+    overflow: hidden; 
+    min-width: 0; 
+    box-sizing: border-box; 
+} 
+.cardHeader { 
+    min-height: 38px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 0 12px; 
+    border-bottom: 1px solid #e8e8e8; 
+    box-sizing: border-box; 
+} 
+.headerLeft { 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+} 
+.headerLeft h2 { 
+    margin: 0; 
+    font-size: 12px; 
+    font-weight: 700; 
+    color: #181818; 
+} 
+.headerIcon { 
+    width: 22px; 
+    height: 22px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 5px; 
+} 
+.profileIcon { 
+    background: #eaf4ff; 
+} 
+.editButton { 
+    border: 1px solid #d8dde6; 
+    background: #ffffff; 
+    color: #0176d3; 
+    font-size: 9px; 
+    padding: 3px 11px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+} 
+.editButton:hover { 
+    background: #f3f9ff; 
+    border-color: #0176d3; 
+} 
+.cardBody { 
+    padding: 10px 12px; 
+    box-sizing: border-box; 
+} 
+.sectionTitle { 
+    color: #0176d3; 
+    font-size: 9px; 
+    font-weight: 700; 
+    margin-bottom: 8px; 
+} 
+.gamingTitle { 
+    margin-top: 15px; 
+} 
+.infoGrid { 
+    display: grid; 
+    grid-template-columns: repeat(3, minmax(0, 1fr)); 
+    column-gap: 16px; 
+    row-gap: 10px; 
+    position: relative; 
+    padding-bottom: 10px; 
+    border-bottom: 1px solid #e8e8e8; 
+} 
+.infoGrid .infoItem:nth-child(4) { 
+    grid-column: 1 / -1; 
+    padding-top: 0; 
+    border-top: 1px solid #e8e8e8; 
+    padding-top: 10px; 
+} 
+.infoItem { 
+    min-width: 0; 
+} 
+.label { 
+    display: block; 
+    font-size: 8px; 
+    color: #706e6b; 
+    margin-bottom: 3px; 
+} 
+.value { 
+    display: block; 
+    font-size: 9px; 
+    color: #181818; 
+    font-weight: 600; 
+    line-height: 1.35; 
+} 
+.gamingGrid { 
+    display: grid; 
+    grid-template-columns: repeat(4, minmax(0, 1fr)); 
+    gap: 10px; 
+} 
+.linkValue { 
+    display: block; 
+    color: #0176d3; 
+    font-size: 9px; 
+    font-weight: 600; 
+} 
+.segmentBadge { 
+    display: inline-block; 
+    padding: 3px 10px; 
+    border-radius: 12px; 
+    font-size: 8px; 
+    font-weight: 600; 
+    line-height: 1.2; 
+} 
+.segmentBadge.Basic { 
+    background: #fef3c7; 
+    color: #92400e; 
+} 
+.segmentBadge.Premium { 
+    background: #ede9fe; 
+    color: #6d28d9; 
+} 
+.segmentBadge.VVIP { 
+    background: #fee2e2; 
+    color: #b91c1c; 
+} 
+.segmentBadge.Business { 
+    background: #dcfce7; 
+    color: #15803d; 
+} 
+.segmentBadge.default { 
+    background: #e5e7eb; 
+    color: #374151; 
+} 
+/* Modal */ 
+.slds-modal { 
+    z-index: 9001; 
+} 
+.slds-backdrop { 
+    z-index: 9000; 
+} 
+.slds-modal__container { 
+    width: 90%; 
+    max-width: 680px; 
+} 
+.slds-modal__header { 
+    position: relative; 
+    padding: 16px 20px; 
+    border-bottom: 1px solid #e5e5e5; 
+} 
+.modalTitle { 
+    margin: 0; 
+    font-size: 16px; 
+    font-weight: 700; 
+    text-align: left; 
+} 
+.closeButton { 
+    position: absolute; 
+    right: 12px; 
+    top: 12px; 
+    width: 28px; 
+    height: 28px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    background: transparent; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+} 
+.closeButton:hover { 
+    background: #f3f3f3; 
+} 
+.modalBody { 
+    padding: 20px; 
+    min-height: 180px; 
+    max-height: 65vh; 
+    overflow-y: auto; 
+} 
+.formGrid { 
+    display: grid; 
+    grid-template-columns: repeat(2, minmax(0, 1fr)); 
+    column-gap: 18px; 
+    row-gap: 14px; 
+} 
+.fullWidth { 
+    grid-column: 1 / -1; 
+} 
+.modalFooter { 
+    display: flex; 
+    justify-content: flex-end; 
+    align-items: center; 
+    gap: 10px; 
+    padding: 12px 20px; 
+    border-top: 1px solid #e5e5e5; 
+} 
+.cancelButton { 
+    min-width: 80px; 
+    height: 34px; 
+    padding: 0 16px; 
+    background: #ffffff; 
+    border: 1px solid #d8dde6; 
+    border-radius: 4px; 
+    color: #181818; 
+    font-size: 12px; 
+    cursor: pointer; 
+} 
+.cancelButton:hover { 
+    background: #f3f3f3; 
+} 
+.saveButton { 
+    min-width: 80px; 
+    height: 34px; 
+    padding: 0 18px; 
+    background: #0176d3; 
+    border: 1px solid #0176d3; 
+    border-radius: 4px; 
+    color: #ffffff; 
+    font-size: 12px; 
+    font-weight: 600; 
+    cursor: pointer; 
+} 
+.saveButton:hover { 
+    background: #014486; 
 }

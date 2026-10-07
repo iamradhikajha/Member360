@@ -102,6 +102,14 @@ export default class MemberProfileCard extends LightningElement {
         }
     }
 
+    get preferredGamesDisplay() {
+        return (this.member?.Preferred_Game__c || '').replace(/;/g, ', ');
+    }
+
+    get preferredChannelDisplay() {
+        return (this.member?.Preferred_Channel__c || '').replace(/;/g, ', ');
+    }
+    
     handleEdit() {
         this.isModalOpen = true;
         this.modalTitle = 'Edit Member Profile';
@@ -113,13 +121,20 @@ export default class MemberProfileCard extends LightningElement {
                   .filter(value => value)
             : [];
 
+        const preferredGame = this.member?.Preferred_Game__c
+            ? this.member.Preferred_Game__c
+                  .split(';')
+                  .map(value => value.trim())
+                  .filter(value => value)
+            : [];
+
         this.editData = {
             gamingSegment: this.member?.Segment__c || '',
             preferredLanguage: this.member?.Preferred_Language__c || '',
             preferredChannel,
             nationality: this.member?.Nationality__c || '',
             property: this.member?.Property__c || '',
-            preferredGame: this.member?.Preferred_Game__c || ''
+            preferredGame
         };
     }
 
@@ -145,13 +160,17 @@ export default class MemberProfileCard extends LightningElement {
                 ? this.editData.preferredChannel.join(';')
                 : this.editData.preferredChannel || '';
 
+            const preferredGame = Array.isArray(this.editData.preferredGame)
+                ? this.editData.preferredGame.join(';')
+                : this.editData.preferredGame || '';
+
             const updatedData = {
                 segment: this.editData.gamingSegment,
                 preferredLanguage: this.editData.preferredLanguage,
                 preferredChannel,
                 nationality: this.editData.nationality,
                 property: this.editData.property,
-                preferredGame: this.editData.preferredGame
+                preferredGame
             };
 
             await updateMemberProfile({

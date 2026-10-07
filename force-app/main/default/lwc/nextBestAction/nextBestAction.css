@@ -1,0 +1,324 @@
+/* =========================================================
+   MAIN CARD
+   ========================================================= */
+
+.nba-card {
+    width: 100%;
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.nba-header {
+    width: 100%;
+    height: 52px;
+
+    padding: 0 16px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e5e5e5;
+}
+
+
+/* LEFT SIDE */
+
+.nba-header-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 9px;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.nba-icon {
+    width: 30px;
+    height: 30px;
+
+    min-width: 30px;
+
+    border-radius: 6px;
+
+    background: #6852d9;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nba-icon lightning-icon {
+    --slds-c-icon-color-foreground-default: #ffffff;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.nba-title {
+    margin: 0;
+    padding: 0;
+
+    font-size: 15px;
+    line-height: 20px;
+
+    font-weight: 700;
+
+    color: #181818;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   VIEW INSIGHTS
+   ========================================================= */
+
+.insights-button {
+    border: 0;
+    background: transparent;
+
+    padding: 0;
+
+    margin: 0;
+
+    color: #0176d3;
+
+    font-size: 13px;
+    line-height: 18px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+}
+
+.insights-button:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+.nba-body {
+    width: 100%;
+
+    min-height: 92px;
+
+    padding: 12px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 8px;
+
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   AI SUMMARY
+   ========================================================= */
+
+.nba-summary {
+    width: 30%;
+
+    min-width: 145px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 8px;
+
+    box-sizing: border-box;
+}
+
+
+.ai-circle {
+    width: 48px;
+    height: 48px;
+
+    min-width: 48px;
+
+    border-radius: 50%;
+
+    border: 1px solid #8b7ae8;
+
+    background: #faf9ff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.nba-summary p {
+    margin: 0;
+
+    font-size: 9px;
+    line-height: 13px;
+
+    color: #181818;
+}
+
+
+/* =========================================================
+   ACTION CARDS
+   ========================================================= */
+
+.action-card {
+    flex: 1;
+
+    min-width: 0;
+
+    min-height: 68px;
+
+    padding: 8px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    gap: 7px;
+
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   ACTION ICON
+   ========================================================= */
+
+.action-icon {
+    width: 24px;
+    height: 24px;
+
+    min-width: 24px;
+
+    border-radius: 5px;
+
+    background: #eef4ff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================================
+   ACTION CONTENT
+   ========================================================= */
+
+.action-content {
+    min-width: 0;
+}
+
+
+.action-content h3 {
+    margin: 0 0 3px;
+
+    font-size: 10px;
+    line-height: 13px;
+
+    font-weight: 700;
+
+    color: #0176d3;
+}
+
+
+.action-content p {
+    margin: 0;
+
+    font-size: 9px;
+    line-height: 12px;
+
+    color: #706e6b;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .nba-summary {
+        min-width: 125px;
+    }
+
+    .nba-summary p {
+        font-size: 8px;
+    }
+}
+
+
+@media (max-width: 900px) {
+
+    .nba-body {
+        flex-wrap: wrap;
+    }
+
+    .nba-summary {
+        width: 100%;
+    }
+
+    .action-card {
+        flex: 1 1 calc(33.33% - 8px);
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .nba-body {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .nba-summary {
+        width: 100%;
+    }
+
+    .action-card {
+        width: 100%;
+    }
+}

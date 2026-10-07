@@ -16,7 +16,7 @@ public with sharing class Member360Controller {
     }
 
     @AuraEnabled
-    public static void updateHostRelationship( Id hostUserId, Date lastContact, String preferredContact, Date nextFollowUp, String notes) {
+    public static void updateHostRelationship( Id hostUserId, Date lastContact, String preferredContact, Date nextFollowUp, String notes ) {
         Member360Helper.updateHostRelationship( hostUserId, lastContact, preferredContact, nextFollowUp, notes);
     }
 }

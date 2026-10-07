@@ -5,12 +5,26 @@
     gap: 5px;
     box-sizing: border-box;
     margin-top: 10px;
-    align-items: start;
+    align-items: stretch;
+}
+
+.engagementContainer > c-gaming-wallet,
+.engagementContainer > c-benefits-offers,
+.engagementContainer > c-marketing-engagement {
+    min-width: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
 @media (max-width: 1100px) {
-
     .engagementContainer {
         grid-template-columns: 1fr;
+    }
+
+    .engagementContainer > c-gaming-wallet,
+    .engagementContainer > c-benefits-offers,
+    .engagementContainer > c-marketing-engagement {
+        height: auto;
     }
 }

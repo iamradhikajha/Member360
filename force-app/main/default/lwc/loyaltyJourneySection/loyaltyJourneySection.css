@@ -1,0 +1,24 @@
+.journey-section {
+    width: 100%;
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+    gap: 12px;
+
+    margin-top: 12px;
+    padding: 0;
+}
+
+.journey-column {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+    .journey-section {
+        grid-template-columns: 1fr;
+    }
+}

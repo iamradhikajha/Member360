@@ -179,7 +179,6 @@ export default class HostRelationshipCard extends LightningElement {
         }];
     }
 
-
     handleHostEdit() {
         this.isHostEditOpen = true;
 
@@ -260,7 +259,15 @@ export default class HostRelationshipCard extends LightningElement {
             this.currentUserNextFollowUp = updatedHostData.nextFollowUp;
             this.currentUserNotes = updatedHostData.notes;
 
-            this.closeHostEdit();
+            this.isHostEditOpen = false;
+
+            this.hostEditData = {
+                hostUserId: '',
+                lastContact: null,
+                preferredContact: '',
+                nextFollowUp: null,
+                notes: ''
+            };
 
             this.dispatchEvent(
                 new ShowToastEvent({

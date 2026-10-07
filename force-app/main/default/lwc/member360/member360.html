@@ -90,6 +90,19 @@
             </p>
         </template>
     </div>
-    <c-member-summary-cards member={member} onsegmentchange={handleSegmentChange}></c-member-summary-cards>
-    <c-member-engagement-summary member={member} onsegmentchange={handleSegmentChange}></c-member-engagement-summary>
+
+    <c-member-summary-cards
+        member={member}
+        onsegmentchange={handleSegmentChange}>
+    </c-member-summary-cards>
+
+    <c-member-engagement-summary
+        member={member}
+        onsegmentchange={handleSegmentChange}>
+    </c-member-engagement-summary>
+
+    <c-loyalty-journey-section
+        member-id={memberId}>
+    </c-loyalty-journey-section>
+
 </template>

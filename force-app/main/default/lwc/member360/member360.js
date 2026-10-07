@@ -2,6 +2,7 @@ import { LightningElement, api, wire } from 'lwc';
 import getMemberDetail from '@salesforce/apex/Member360Controller.getMemberDetail';
 
 export default class Member360 extends LightningElement {
+
     @api recordId;
 
     member;
@@ -9,14 +10,20 @@ export default class Member360 extends LightningElement {
 
     @wire(getMemberDetail, { memberId: '$recordId' })
     wiredMember({ data, error }) {
+
         if (data) {
             this.member = data;
             console.log('ln14::', data);
             this.error = undefined;
+
         } else if (error) {
             this.error = error;
             this.member = undefined;
         }
+    }
+
+    get memberId() {
+        return this.member?.Id || null;
     }
 
     get memberInitials() {
@@ -103,6 +110,7 @@ export default class Member360 extends LightningElement {
     }
 
     handleSegmentChange(event) {
+
         const {
             segment,
             preferredLanguage,

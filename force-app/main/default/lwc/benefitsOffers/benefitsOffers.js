@@ -32,11 +32,11 @@ export default class BenefitsOffers extends LightningElement {
     }
 
     get availableBenefits() {
-        return this.benefits.filter(item => !item.isExpiringSoon).slice(0, 4);
+    return this.benefits.filter(item => !item.isExpiringSoon).slice(0, 2);
     }
 
     get expiringBenefits() {
-        return this.benefits.filter(item => item.isExpiringSoon).slice(0, 4);
+        return this.benefits.filter(item => item.isExpiringSoon).slice(0, 2);
     }
 
     get allBenefits() {
