@@ -1,324 +1,135 @@
-/* =========================================================
-   MAIN CARD
-   ========================================================= */
+:host {
+    display: block;
+}
 
 .nba-card {
     width: 100%;
-    box-sizing: border-box;
-
-    background: #ffffff;
-
+    padding-bottom: 15px;
     border: 1px solid #e5e5e5;
-    border-radius: 6px;
-
+    border-radius: 5px;
+    background: #ffffff;
     overflow: hidden;
+    box-sizing: border-box;
 }
-
-
-/* =========================================================
-   HEADER
-   ========================================================= */
 
 .nba-header {
-    width: 100%;
-    height: 52px;
-
-    padding: 0 16px;
-
+    height: 29px;
+    padding: 0 9px;
     box-sizing: border-box;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-
-    background: #ffffff;
-
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #eeeeee;
 }
 
 
-/* LEFT SIDE */
-
-.nba-header-left {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    gap: 9px;
-
-    min-width: 0;
-}
-
-
-/* =========================================================
-   ICON
-   ========================================================= */
-
-.nba-icon {
-    width: 30px;
-    height: 30px;
-
-    min-width: 30px;
-
-    border-radius: 6px;
-
-    background: #6852d9;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.nba-icon lightning-icon {
-    --slds-c-icon-color-foreground-default: #ffffff;
-}
-
-
-/* =========================================================
-   TITLE
-   ========================================================= */
-
-.nba-title {
+.nba-header-title {
     margin: 0;
-    padding: 0;
-
-    font-size: 15px;
-    line-height: 20px;
-
-    font-weight: 700;
-
     color: #181818;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 10px;
+    line-height: 12px;
+    font-weight: 700;
 }
 
 
-/* =========================================================
-   VIEW INSIGHTS
-   ========================================================= */
-
-.insights-button {
-    border: 0;
-    background: transparent;
-
-    padding: 0;
-
-    margin: 0;
-
-    color: #0176d3;
-
-    font-size: 13px;
-    line-height: 18px;
-
-    font-weight: 500;
-
-    cursor: pointer;
-
-    white-space: nowrap;
+.nba-insights-button {
+    --slds-c-button-neutral-color-background: #ffffff;
+    --slds-c-button-neutral-color-border: #d9dce2;
+    --slds-c-button-text-color: #1769aa;
+    --slds-c-button-radius-border: 3px;
+    transform: scale(0.72);
+    transform-origin: right center;
 }
-
-.insights-button:hover {
-    text-decoration: underline;
-}
-
-
-/* =========================================================
-   BODY
-   ========================================================= */
 
 .nba-body {
-    width: 100%;
-
-    min-height: 92px;
-
-    padding: 12px;
-
+    height: 83px;
+    padding: 9px 8px;
     box-sizing: border-box;
-
     display: flex;
-    flex-direction: row;
     align-items: center;
-
-    gap: 8px;
-
-    background: #ffffff;
 }
 
-
-/* =========================================================
-   AI SUMMARY
-   ========================================================= */
-
-.nba-summary {
-    width: 30%;
-
-    min-width: 145px;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    gap: 8px;
-
-    box-sizing: border-box;
-}
-
-
-.ai-circle {
-    width: 48px;
-    height: 48px;
-
-    min-width: 48px;
-
+.nba-ai-circle {
+    width: 51px;
+    height: 51px;
+    min-width: 51px;
+    min-height: 51px;
     border-radius: 50%;
-
-    border: 1px solid #8b7ae8;
-
-    background: #faf9ff;
-
+    border: 1px solid #9b8ce8;
+    background:
+        radial-gradient(
+            circle, #ffffff 0%, #faf9ff 65%, #f5f2ff 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-
-.nba-summary p {
-    margin: 0;
-
-    font-size: 9px;
-    line-height: 13px;
-
-    color: #181818;
-}
-
-
-/* =========================================================
-   ACTION CARDS
-   ========================================================= */
-
-.action-card {
-    flex: 1;
-
-    min-width: 0;
-
-    min-height: 68px;
-
-    padding: 8px;
-
     box-sizing: border-box;
-
-    border: 1px solid #e5e5e5;
-    border-radius: 6px;
-
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-
-    gap: 7px;
-
-    background: #ffffff;
+    margin-right: 10px;
 }
 
+.nba-ai-svg {
+    width: 28px;
+    height: 28px;
+    display: block;
+}
+.nba-description {
+    width: 112px;
+    min-width: 112px;
+    color: #292929;
+    font-size: 7px;
+    line-height: 9px;
+    margin-right: 8px;
+    box-sizing: border-box;
+}
 
-/* =========================================================
-   ACTION ICON
-   ========================================================= */
+.nba-actions {
+    flex: 1;
+    min-width: 0;
+    height: 57px;
+}
 
-.action-icon {
+.nba-action-card {
+    height: 57px;
+    width: 100%;
+    padding: 7px 5px;
+    box-sizing: border-box;
+    border: 1px solid #e2e3e7;
+    border-radius: 4px;
+    background: #ffffff;
+    align-items: flex-start;
+}
+
+.nba-action-icon {
     width: 24px;
-    height: 24px;
-
     min-width: 24px;
-
-    border-radius: 5px;
-
-    background: #eef4ff;
-
+    height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: 3px;
 }
 
+.nba-action-icon lightning-icon {
+    --slds-c-icon-color-foreground: #5962d7;
+}
 
-/* =========================================================
-   ACTION CONTENT
-   ========================================================= */
+.dining-icon lightning-icon {
+    --slds-c-icon-color-foreground: #3d965f;
+}
 
-.action-content {
+.nba-action-content {
     min-width: 0;
 }
 
-
-.action-content h3 {
-    margin: 0 0 3px;
-
-    font-size: 10px;
-    line-height: 13px;
-
+.nba-action-title {
+    color: #1769aa;
+    font-size: 7px;
+    line-height: 9px;
     font-weight: 700;
-
-    color: #0176d3;
+    white-space: nowrap;
 }
 
 
-.action-content p {
-    margin: 0;
-
-    font-size: 9px;
-    line-height: 12px;
-
-    color: #706e6b;
-}
-
-
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-
-@media (max-width: 1200px) {
-
-    .nba-summary {
-        min-width: 125px;
-    }
-
-    .nba-summary p {
-        font-size: 8px;
-    }
-}
-
-
-@media (max-width: 900px) {
-
-    .nba-body {
-        flex-wrap: wrap;
-    }
-
-    .nba-summary {
-        width: 100%;
-    }
-
-    .action-card {
-        flex: 1 1 calc(33.33% - 8px);
-    }
-}
-
-
-@media (max-width: 600px) {
-
-    .nba-body {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .nba-summary {
-        width: 100%;
-    }
-
-    .action-card {
-        width: 100%;
-    }
+.nba-action-description {
+    color: #3d3d3d;
+    font-size: 6.5px;
+    line-height: 8px;
+    margin-top: 3px;
+    white-space: nowrap;
 }

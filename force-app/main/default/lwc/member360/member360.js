@@ -10,12 +10,9 @@ export default class Member360 extends LightningElement {
 
     @wire(getMemberDetail, { memberId: '$recordId' })
     wiredMember({ data, error }) {
-
         if (data) {
             this.member = data;
-            console.log('ln14::', data);
             this.error = undefined;
-
         } else if (error) {
             this.error = error;
             this.member = undefined;
@@ -27,10 +24,7 @@ export default class Member360 extends LightningElement {
     }
 
     get memberInitials() {
-        if (!this.member?.Contact?.Name) {
-            return '';
-        }
-
+        if (!this.member?.Contact?.Name) return '';
         return this.member.Contact.Name
             .split(' ')
             .map(word => word[0])

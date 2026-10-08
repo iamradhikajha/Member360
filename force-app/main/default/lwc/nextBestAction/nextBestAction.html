@@ -1,3 +1,157 @@
 <template>
-    
+    <article class="slds-card nba-card">
+        <div class="slds-card__header nba-header">
+            <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                <div class="slds-media slds-media_center">
+                    <div class="slds-media__figure slds-m-right_x-small">
+                        <lightning-icon icon-name="standard:einstein" size="x-small" alternative-text="AI"> </lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="nba-header-title"> Next Best Action (Powered by Data Cloud &amp; AI)</h2>
+                    </div>
+                </div>
+                <lightning-button
+                    label="View Insights"
+                    variant="neutral"
+                    class="nba-insights-button"
+                    onclick={handleInsights}>
+                </lightning-button>
+
+            </div>
+        </div>
+        <div class="slds-card__body nba-body">
+            <div class="nba-ai-circle">
+
+                <svg
+                    class="nba-ai-svg"
+                    viewBox="0 0 48 48"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M24 7
+                           L26.8 15.2
+                           L35 18
+                           L26.8 20.8
+                           L24 29
+                           L21.2 20.8
+                           L13 18
+                           L21.2 15.2 Z"
+                        fill="#6957D9">
+                    </path>
+
+                    <path
+                        d="M35.5 25
+                           L37 29.5
+                           L41.5 31
+                           L37 32.5
+                           L35.5 37
+                           L34 32.5
+                           L29.5 31
+                           L34 29.5 Z"
+                        fill="#6957D9">
+                    </path>
+
+                    <!-- Small dot -->
+                    <circle
+                        cx="13"
+                        cy="31"
+                        r="2.2"
+                        fill="#6957D9">
+                    </circle>
+
+                </svg>
+
+            </div>
+
+
+            <div class="nba-description">
+                Based on {handleNameSegment} playing behavior, tier
+                progression and engagement, here are
+                recommended actions.
+            </div>
+
+          <div class="slds-grid slds-gutters_x-small nba-actions">
+
+                <div class="slds-col slds-size_1-of-3">
+                    <div class="nba-action-card slds-grid">
+
+                        <div class="nba-action-icon">
+                            <lightning-icon
+                                icon-name="utility:favorite"
+                                size="x-small"
+                                alternative-text="">
+                            </lightning-icon>
+                        </div>
+
+                        <div class="nba-action-content">
+
+                            <div class="nba-action-title">
+                                Send Tier<br />
+                                Upgrade Offer
+                            </div>
+
+                            <div class="nba-action-description">
+                                Encourage upgrade<br />
+                                to Silver Tier
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <div class="nba-action-card slds-grid">
+
+                        <div class="nba-action-icon">
+                            <lightning-icon
+                                icon-name="utility:company"
+                                size="x-small"
+                                alternative-text="">
+                            </lightning-icon>
+                        </div>
+
+                        <div class="nba-action-content">
+
+                            <div class="nba-action-title">
+                                Offer Weekend<br />
+                                Staycation
+                            </div>
+
+                            <div class="nba-action-description">
+                                Promote stay &amp;<br />
+                                play package
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <div class="nba-action-card slds-grid">
+
+                        <div class="nba-action-icon dining-icon">
+                            <lightning-icon
+                                icon-name="utility:food_and_drink"
+                                size="x-small"
+                                alternative-text="">
+                            </lightning-icon>
+                        </div>
+
+                        <div class="nba-action-content">
+
+                            <div class="nba-action-title">
+                                Issue Dining<br />
+                                Voucher
+                            </div>
+
+                            <div class="nba-action-description">
+                                Increase dining<br />
+                                engagement
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </article>
 </template>

@@ -1,82 +1,259 @@
 <template>
+
     <div class="summaryCard">
+
+
+        <!-- HEADER -->
+
         <div class="cardHeader">
+
             <div class="headerLeft">
+
                 <div class="headerIcon loyaltyIcon">
-                    <lightning-icon icon-name="standard:product" alternative-text="Loyalty Status" size="x-small"></lightning-icon>
+
+                    <lightning-icon
+                        icon-name="standard:product"
+                        alternative-text="Loyalty Status"
+                        size="x-small">
+                    </lightning-icon>
+
                 </div>
-                <h2>Loyalty Status</h2>
+
+
+                <div>
+
+                    <h2>Loyalty Status</h2>
+
+
+                    <!-- CURRENT MEMBER NAME -->
+
+                    <template if:true={memberName}>
+
+                        <div class="memberName">
+                            {memberName}
+                        </div>
+
+                    </template>
+
+                </div>
+
             </div>
+
         </div>
 
+
+        <!-- LOYALTY STATUS -->
+
         <template if:true={loyaltyStatus}>
+
+
             <div class="loyaltyBody">
+
+
+                <!-- CURRENT TIER -->
+
                 <div class="currentTierBox">
-                    <div class="tierName">{currentTierLabel}</div>
-                    <div class="currentTierText">Current Tier</div>
+
+                    <div class="tierName">
+                        {currentTierLabel}
+                    </div>
+
+
+                    <div class="currentTierText">
+                        Current Tier
+                    </div>
+
+
                     <div class="pointsValue">
+
                         {formattedCurrentPoints}
-                        <span>{loyaltyStatus.currencyName}</span>
+
+                        <span>
+                            {loyaltyStatus.currencyName}
+                        </span>
+
                     </div>
+
+
                     <div class="requiredPoints">
-                        <template if:true={loyaltyStatus.hasNextTier}>
-                            Required: {formattedNextTierMinimum} {loyaltyStatus.currencyName}
+
+                        <template
+                            if:true={loyaltyStatus.hasNextTier}>
+
+                            Required:
+                            {formattedNextTierMinimum}
+                            {loyaltyStatus.currencyName}
+
                         </template>
-                        <template if:false={loyaltyStatus.hasNextTier}>Highest Tier</template>
+
+
+                        <template
+                            if:false={loyaltyStatus.hasNextTier}>
+
+                            Highest Tier
+
+                        </template>
+
                     </div>
+
                 </div>
+
+
+                <!-- PROGRESS SECTION -->
 
                 <div class="tierProgressSection">
+
+
                     <div class="progressHeader">
-                        <span>Tier Progress</span>
-                        <strong>{loyaltyStatus.progressPercentage}%</strong>
+
+                        <span>
+                            Tier Progress
+                        </span>
+
+
+                        <strong>
+                            {loyaltyStatus.progressPercentage}%
+                        </strong>
+
                     </div>
+
 
                     <div class="progressBar">
-                        <div class="progressFill" style={progressStyle}></div>
+
+                        <div
+                            class="progressFill"
+                            style={progressStyle}>
+                        </div>
+
                     </div>
+
+
+                    <!-- NEXT TIER -->
 
                     <div class="nextTierSection">
-                        <template if:true={loyaltyStatus.hasNextTier}>
+
+
+                        <template
+                            if:true={loyaltyStatus.hasNextTier}>
+
+
                             <div class="nextTierLabel">
+
                                 Next Tier:
-                                <strong>{nextTierLabel}</strong>
+
+                                <strong>
+                                    {nextTierLabel}
+                                </strong>
+
                             </div>
+
+
                             <div class="upgradePoints">
-                                {formattedPointsToUpgrade} {loyaltyStatus.currencyName} to upgrade
+
+                                {formattedPointsToUpgrade}
+
+                                {loyaltyStatus.currencyName}
+
+                                to upgrade
+
                             </div>
+
+
                         </template>
 
-                        <template if:false={loyaltyStatus.hasNextTier}>
+
+                        <template
+                            if:false={loyaltyStatus.hasNextTier}>
+
+
                             <div class="nextTierLabel">
-                                <strong>Highest Tier</strong>
+
+                                <strong>
+                                    Highest Tier
+                                </strong>
+
                             </div>
-                            <div class="upgradePoints">Congratulations!</div>
+
+
+                            <div class="upgradePoints">
+
+                                Congratulations!
+
+                            </div>
+
+
                         </template>
+
                     </div>
+
                 </div>
+
             </div>
+
+
+            <!-- MESSAGE -->
 
             <div class="loyaltyMessage">
+
+
                 <div class="messageIcon">
-                    <lightning-icon icon-name="utility:favorite" alternative-text="Benefits" size="x-small"></lightning-icon>
+
+                    <lightning-icon
+                        icon-name="utility:favorite"
+                        alternative-text="Benefits"
+                        size="x-small">
+                    </lightning-icon>
+
                 </div>
+
 
                 <div class="messageText">
-                    <template if:true={loyaltyStatus.hasNextTier}>
-                        Keep playing to reach {nextTierLabel} Tier and unlock more exciting benefits!
+
+
+                    <template
+                        if:true={loyaltyStatus.hasNextTier}>
+
+                        Keep playing to reach
+                        {nextTierLabel}
+                        Tier and unlock more exciting benefits!
+
                     </template>
-                    <template if:false={loyaltyStatus.hasNextTier}>
-                        Congratulations! You've reached the highest loyalty tier and unlocked all available benefits.
+
+
+                    <template
+                        if:false={loyaltyStatus.hasNextTier}>
+
+                        Congratulations! You've reached
+                        the highest loyalty tier and unlocked
+                        all available benefits.
+
                     </template>
+
+
                 </div>
+
             </div>
+
+
         </template>
 
+
+        <!-- LOADING -->
+
         <template if:true={loyaltyLoading}>
+
             <div class="loyaltyLoading">
-                <lightning-spinner alternative-text="Loading Loyalty Status" size="small"></lightning-spinner>
+
+                <lightning-spinner
+                    alternative-text="Loading Loyalty Status"
+                    size="small">
+                </lightning-spinner>
+
             </div>
+
         </template>
+
+
     </div>
+
 </template>

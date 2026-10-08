@@ -1,7 +1,7 @@
 :host {
     display: block;
     width: 100%;
-    height: 100%;
+    min-width: 0;
 }
 
 .summaryCard {
@@ -10,28 +10,26 @@
     border-radius: 7px;
     overflow: hidden;
     min-width: 0;
-    width: 100%;
-    height: 100%;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
+    align-self: start;
 }
 
 .cardHeader {
-    min-height: 38px;
+    height: 45px;
+    min-height: 45px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 12px;
     border-bottom: 1px solid #e8e8e8;
     box-sizing: border-box;
-    flex-shrink: 0;
 }
 
 .headerLeft {
     display: flex;
     align-items: center;
     gap: 7px;
+    min-width: 0;
 }
 
 .headerLeft h2 {
@@ -39,6 +37,7 @@
     font-size: 12px;
     font-weight: 700;
     color: #181818;
+    white-space: nowrap;
 }
 
 .headerIcon {
@@ -48,10 +47,11 @@
     align-items: center;
     justify-content: center;
     border-radius: 5px;
+    flex-shrink: 0;
 }
 
-.marketingIcon {
-    background: #e5f4f2;
+.engagementIcon {
+    background: #1f9d8b;
 }
 
 .viewAllButton {
@@ -62,10 +62,304 @@
     font-weight: 500;
     padding: 3px 0;
     cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
-.cardBody {
-    padding: 10px 12px;
+.engagementBody {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 142px;
+    min-height: 142px;
     box-sizing: border-box;
+}
+
+.campaignSection {
+    min-width: 0;
+    padding: 10px 12px 5px;
+    border-right: 1px solid #e5e5e5;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.sectionTitle {
+    margin: 0 0 7px;
+    color: #444;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 13px;
+    white-space: nowrap;
+}
+
+.campaignRow {
+    width: 100%;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.campaignIconWrapper {
+    width: 20px;
+    min-width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-right: 5px;
+}
+
+.campaignContent {
+    min-width: 0;
     flex: 1;
+    overflow: hidden;
+}
+
+.campaignName {
+    width: 100%;
+    color: #444;
+    font-size: 9px;
+    font-weight: 500;
+    line-height: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.engagedText,.notEngagedText {
+    display: none;
+}
+
+.noData {
+    color: #888;
+    font-size: 9px;
+    padding-top: 7px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.metricsSection {
+    min-width: 0;
+    padding: 10px 12px 5px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.metricsSection .sectionTitle {
+    margin-bottom: 7px;
+}
+
+.metricRow {
+    width: 100%;
+    height: 29px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.metricLabel {
+    min-width: 0;
+    flex: 1;
+    color: #555;
+    font-size: 9px;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.metricValueWrapper {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    flex-shrink: 0;
+}
+
+.metricValue {
+    color: #181818;
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.metricChange {
+    font-size: 7px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.metricChange.positive {
+    color: #2e844a;
+}
+
+.metricChange.negative {
+    color: #d83b01;
+}
+
+.arrow {
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.appStatus {
+    color: #239447;
+    font-size: 9px;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.lastEngagement {
+    color: #555;
+    font-size: 8px;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.slds-modal {
+    z-index: 9001;
+}
+
+.slds-backdrop {
+    z-index: 9000;
+}
+
+.engagementModalContainer {
+    width: 90%;
+    max-width: 800px;
+}
+
+.slds-modal__header {
+    position: relative;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.modalTitle {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.closeButton {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.closeButton:hover {
+    background: #f3f3f3;
+}
+
+.engagementModalBody {
+    padding: 20px;
+    max-height: 65vh;
+    overflow-y: auto;
+}
+
+.modalEngagementGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.modalSectionTitle {
+    margin: 0 0 12px;
+    color: #444;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.modalCampaignRow {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.modalCampaignContent {
+    min-width: 0;
+    flex: 1;
+}
+
+.modalCampaignName {
+    color: #444;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.modalCampaignStatus {
+    color: #666;
+    font-size: 9px;
+    margin-top: 2px;
+}
+
+.modalMetricRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.modalMetricLabel {
+    color: #555;
+    font-size: 10px;
+}
+
+.modalMetricValue {
+    color: #181818;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.modalFooter {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border-top: 1px solid #e5e5e5;
+}
+
+.cancelButton {
+    min-width: 80px;
+    height: 34px;
+    padding: 0 16px;
+    background: #fff;
+    border: 1px solid #d8dde6;
+    border-radius: 4px;
+    color: #181818;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+@media (max-width: 700px) {
+    .engagementBody {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    .campaignSection {
+        border-right: none;
+        border-bottom: 1px solid #e5e5e5;
+    }
+    .modalEngagementGrid {
+        grid-template-columns: 1fr;
+    }
 }

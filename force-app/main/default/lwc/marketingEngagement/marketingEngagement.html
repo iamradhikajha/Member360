@@ -2,16 +2,107 @@
     <div class="summaryCard">
         <div class="cardHeader">
             <div class="headerLeft">
-                <div class="headerIcon marketingIcon">
-                    <lightning-icon icon-name="utility:send" alternative-text="Marketing Engagement" size="x-small"></lightning-icon>
-                </div>
+                <div class="headerIcon engagementIcon"><lightning-icon icon-name="utility:send" alternative-text="Marketing Engagement" size="x-small"></lightning-icon></div>
                 <h2>Marketing Engagement</h2>
             </div>
-            <button type="button" class="viewAllButton">View All</button>
+            <button type="button" class="viewAllButton" onclick={handleViewAll}> View All</button>
         </div>
-
-        <div class="cardBody">
-            Marketing Engagement Content
+        <div class="engagementBody">
+            <div class="campaignSection">
+                <div class="sectionTitle">Campaign Engagement</div>
+                <template if:true={hasCampaigns}>
+                    <template for:each={displayedCampaigns} for:item="campaign">
+                        <div class="campaignRow" key={campaign.campaignId}>
+                            <div class="campaignIconWrapper"><lightning-icon icon-name={campaign.iconName} variant={campaign.iconVariant} alternative-text="Campaign Status" size="xx-small"></lightning-icon></div>
+                            <div class="campaignContent"><div class="campaignName">{campaign.campaignName}</div></div>
+                        </div>
+                    </template>
+                </template>
+                <template if:false={hasCampaigns}><div class="noData">No campaign engagement found</div></template>
+            </div>
+            <div class="metricsSection">
+                <div class="sectionTitle">Engagement Metrics (90 Days)</div>
+                <div class="metricRow">
+                    <div class="metricLabel">Email Open Rate</div>
+                    <div class="metricValueWrapper">
+                        <span class="metricValue">{emailOpenRate}%</span>
+                        <template if:true={showEmailChange}><span class={emailChangeClass}> {emailChangeArrow} {emailOpenChange}%</span></template>
+                    </div>
+                </div>
+                <div class="metricRow">
+                    <div class="metricLabel">SMS Click Rate</div>
+                    <div class="metricValueWrapper">
+                        <span class="metricValue">{smsClickRate}%</span>
+                        <template if:true={showSmsChange}><span class={smsChangeClass}>{smsChangeArrow}{smsClickChange}%</span></template>
+                    </div>
+                </div>
+                <div class="metricRow">
+                    <div class="metricLabel">App Engagement</div>
+                    <span class="appStatus">{appEngagement}</span>
+                </div>
+                <div class="metricRow">
+                    <div class="metricLabel">Last Engagement</div>
+                    <span class="lastEngagement">
+                        <template if:true={lastEngagement}>{lastEngagement}</template>
+                        <template if:false={lastEngagement}>—</template>
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
+    <template if:true={showViewAll}>
+        <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container engagementModalContainer">
+                <header class="slds-modal__header">
+                    <button type="button" class="closeButton" title="Close" onclick={handleCloseViewAll}> <lightning-icon icon-name="utility:close" alternative-text="Close" size="x-small"> </lightning-icon></button>
+                    <h2 class="modalTitle">Marketing Engagement</h2>
+                </header>
+                <div class="slds-modal__content engagementModalBody">
+                    <div class="modalEngagementGrid">
+                        <div class="modalCampaignSection">
+                            <h3 class="modalSectionTitle">Campaign Engagement</h3>
+                            <template if:true={hasCampaigns}>
+                                <template for:each={formattedCampaigns} for:item="campaign">
+                                    <div class="modalCampaignRow" key={campaign.campaignId}>
+                                        <div class="campaignIconWrapper"><lightning-icon icon-name={campaign.iconName} variant={campaign.iconVariant} alternative-text="Campaign Status" size="x-small"></lightning-icon></div>
+                                        <div class="modalCampaignContent">
+                                            <div class="modalCampaignName"> {campaign.campaignName}</div>
+                                            <div class="modalCampaignStatus">
+                                                <template if:true={campaign.engaged}> Engaged on {campaign.formattedDate}</template>
+                                                <template if:false={campaign.engaged}>Not engaged</template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                            </template>
+                            <template if:false={hasCampaigns}><div class="noData">No campaign engagement found</div></template>
+                        </div>
+                        <div class="modalMetricsSection">
+                            <h3 class="modalSectionTitle">Engagement Metrics (90 Days)</h3>
+                            <div class="modalMetricRow">
+                                <span class="modalMetricLabel">Email Open Rate</span>
+                                <span class="modalMetricValue">{emailOpenRate}%</span>
+                            </div>
+                            <div class="modalMetricRow">
+                                <span class="modalMetricLabel">SMS Click Rate</span>
+                                <span class="modalMetricValue">{smsClickRate}%</span>
+                            </div>
+                            <div class="modalMetricRow">
+                                <span class="modalMetricLabel">App Engagement</span>
+                                <span class="modalMetricValue">{appEngagement}</span>
+                            </div>
+                            <div class="modalMetricRow">
+                                <span class="modalMetricLabel">Last Engagement</span>
+                                <span class="modalMetricValue">{lastEngagement}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="modalFooter">
+                    <button  type="button"  class="cancelButton"  onclick={handleCloseViewAll}>Close</button>
+                </footer>   
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
 </template>
