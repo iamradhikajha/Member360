@@ -17,21 +17,14 @@ export default class GamingWallet extends LightningElement {
     wiredGamingWallet(result) {
         this.walletWireResult = result;
         const { data, error } = result;
-
         if (data) {
-            this.walletCurrencies = data.map((item, index) => {
-                return {
-                    ...item,
+            this.walletCurrencies = data.map((item, index) => {return {...item,
                     formattedBalance: new Intl.NumberFormat('en-US').format(item.pointsBalance || 0),
                     cardClass: `currencyCard currencyCard${(index % 4) + 1}`
                 };
             });
-
             this.setWalletBalanceTime();
-        } else if (error) {
-            this.walletCurrencies = [];
-            console.error('Gaming Wallet Error:', JSON.stringify(error));
-        }
+        } else if (error) this.walletCurrencies = [];
     }
 
     get visibleWalletCurrencies() {
@@ -43,14 +36,7 @@ export default class GamingWallet extends LightningElement {
     }
 
     setWalletBalanceTime() {
-        this.walletBalanceTime = new Intl.DateTimeFormat('en-GB', {
-            day: '2-digit',
-            month: 'short',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: true
-        }).format(new Date());
+        this.walletBalanceTime = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true}).format(new Date());
     }
 
     handleInfoClick() {
@@ -58,9 +44,7 @@ export default class GamingWallet extends LightningElement {
     }
 
     handleViewAll() {
-        if (this.walletCurrencies.length > 0) {
-            this.isWalletModalOpen = true;
-        }
+        if (this.walletCurrencies.length > 0) this.isWalletModalOpen = true;
     }
 
     handleCloseModal() {
@@ -68,22 +52,14 @@ export default class GamingWallet extends LightningElement {
     }
 
     async handleRefresh() {
-        if (this.isRefreshing || !this.walletWireResult) {
-            return;
-        }
-
+        if (this.isRefreshing || !this.walletWireResult) return;
         this.isRefreshing = true;
         this.showRefreshSuccess = false;
-
         try {
             await refreshApex(this.walletWireResult);
             this.showRefreshSuccess = true;
-
             clearTimeout(this.refreshTimeout);
-
-            this.refreshTimeout = setTimeout(() => {
-                this.showRefreshSuccess = false;
-            }, 3000);
+            this.refreshTimeout = setTimeout(() => {this.showRefreshSuccess = false;}, 3000);
         } catch (error) {
             console.error('Gaming Wallet Refresh Error:', JSON.stringify(error));
         } finally {

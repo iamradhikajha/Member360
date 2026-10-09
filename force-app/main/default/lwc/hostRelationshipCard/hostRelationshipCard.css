@@ -212,8 +212,6 @@
     text-overflow: ellipsis;
 }
 
-/* Modal */
-
 .slds-modal {
     z-index: 9001;
 }

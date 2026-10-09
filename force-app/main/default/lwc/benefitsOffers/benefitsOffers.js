@@ -3,7 +3,6 @@ import getMemberBenefits from '@salesforce/apex/BenefitsOffersController.getMemb
 
 export default class BenefitsOffers extends LightningElement {
     @api member;
-
     benefits = [];
     isModalOpen = false;
     error;
@@ -11,28 +10,22 @@ export default class BenefitsOffers extends LightningElement {
     @wire(getMemberBenefits, { memberId: '$member.Id' })
     wiredBenefits({ data, error }) {
         if (data) {
-            this.benefits = data.map(item => ({
-                ...item,
-                formattedEndDate: item.endDate
-                    ? new Intl.DateTimeFormat('en-GB', {
-                        day: '2-digit',
-                        month: 'short',
-                        year: 'numeric'
-                    }).format(new Date(`${item.endDate}T00:00:00`))
-                    : '',
-                expiryText: this.getExpiryText(item),
-                benefitClass: item.isExpiringSoon ? 'benefitItem expiring' : 'benefitItem'
-            }));
-            this.error = undefined;
+            this.benefits = data.map(item => ({...item,formattedEndDate: item.endDate? new Intl.DateTimeFormat('en-GB', {
+                day: '2-digit', month: 'short', year: 'numeric'}).format(new Date(`${item.endDate}T00:00:00`)) : '',
+            expiryText: this.getExpiryText(item),
+            benefitClass: item.isExpiringSoon ? 'benefitItem expiring' : 'benefitItem'
+        }));
+        this.error = undefined;
         } else if (error) {
-            this.benefits = [];
-            this.error = error;
-            console.error('Benefits & Offers Error:', JSON.stringify(error));
+        this.benefits = [];
+        this.error = error;
         }
     }
 
     get availableBenefits() {
-    return this.benefits.filter(item => !item.isExpiringSoon).slice(0, 2);
+        return this.benefits.filter(item => {
+            return item.daysRemaining === null || item.daysRemaining === undefined || item.daysRemaining > 30;
+        }) .slice(0, 2);
     }
 
     get expiringBenefits() {
@@ -56,15 +49,9 @@ export default class BenefitsOffers extends LightningElement {
     }
 
     getExpiryText(item) {
-        if (item.daysRemaining === null || item.daysRemaining === undefined) {
-            return item.formattedEndDate
-                ? `Valid until ${item.formattedEndDate}`
-                : 'No expiry date';
-        }
-
+        if (item.daysRemaining === null || item.daysRemaining === undefined) return item.formattedEndDate ? `Valid until ${item.formattedEndDate}`: 'No expiry date';
         if (item.daysRemaining === 0) return 'Expires today';
         if (item.daysRemaining === 1) return 'Expires in 1 day';
-
         return `Expires in ${item.daysRemaining} days`;
     }
 

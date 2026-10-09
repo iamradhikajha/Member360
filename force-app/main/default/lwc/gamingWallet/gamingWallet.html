@@ -2,9 +2,7 @@
     <div class="summaryCard">
         <div class="cardHeader">
             <div class="headerLeft">
-                <div class="headerIcon walletIcon">
-                    <lightning-icon icon-name="standard:currency" alternative-text="Gaming Wallet" size="x-small"></lightning-icon>
-                </div>
+                <div class="headerIcon walletIcon"><lightning-icon icon-name="standard:currency" alternative-text="Gaming Wallet" size="x-small"></lightning-icon></div>
                 <h2>Gaming Wallet</h2>
                 <button type="button" class="infoButton" title="About Gaming Wallet" onclick={handleInfoClick}>
                     <lightning-icon icon-name="utility:info" alternative-text="Information" size="xx-small"></lightning-icon>
@@ -12,15 +10,12 @@
             </div>
             <button type="button" class="viewAllButton" onclick={handleViewAll}>View All</button>
         </div>
-
         <template if:true={showInfo}>
             <div class="infoMessage">
                 <strong>Gaming Wallet</strong>
                 <span>Displays the member's available loyalty currencies and their current balances.</span>
             </div>
         </template>
-
-        
         <div class="walletBody">
             <template if:true={isRefreshing}>
                 <div class="refreshMessage">
@@ -28,7 +23,6 @@
                     <span>Refreshing wallet...</span>
                 </div>
             </template>
-
             <div class="walletGrid">
                 <template for:each={visibleWalletCurrencies} for:item="currency">
                     <div key={currency.currencyName} class={currency.cardClass}>
@@ -38,14 +32,12 @@
                     </div>
                 </template>
             </div>
-
             <div class="walletFooter">
                 <span>Wallet balances as of {walletBalanceTime}</span>
                 <button type="button" class={refreshButtonClass} title="Refresh Gaming Wallet" onclick={handleRefresh} disabled={isRefreshing}>
                     <lightning-icon icon-name="utility:refresh" alternative-text="Refresh" size="x-small"></lightning-icon>
                 </button>
             </div>
-
             <template if:true={showRefreshSuccess}>
                 <div class="refreshSuccess">
                     <lightning-icon icon-name="utility:check" alternative-text="Refreshed" size="xx-small"></lightning-icon>
@@ -54,8 +46,6 @@
             </template>
         </div>
     </div>
-
-    <!-- Wallet Modal -->
     <template if:true={isWalletModalOpen}>
         <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="walletModalHeading" class="slds-modal slds-fade-in-open">
             <div class="slds-modal__container walletModalContainer">
@@ -65,7 +55,6 @@
                     </button>
                     <h2 id="walletModalHeading" class="modalTitle">Gaming Wallet</h2>
                 </header>
-
                 <div class="slds-modal__content walletModalBody">
                     <div class="modalWalletGrid">
                         <template for:each={walletCurrencies} for:item="currency">
@@ -77,13 +66,11 @@
                         </template>
                     </div>
                 </div>
-
                 <footer class="slds-modal__footer modalFooter">
                     <button type="button" class="cancelButton" onclick={handleCloseModal}>Close</button>
                 </footer>
             </div>
         </section>
-
         <div class="slds-backdrop slds-backdrop_open"></div>
     </template>
 </template>

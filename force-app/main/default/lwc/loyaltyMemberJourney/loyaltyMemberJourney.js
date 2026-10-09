@@ -20,17 +20,7 @@ export default class LoyaltyMemberJourney extends LightningElement {
         if (data) {
             this.error = undefined;
             this.journey = data.map((item) => {
-                return {
-                    id: item.id,
-                    title: item.title,
-                    activityDate: item.activityDate,
-                    type: item.type,
-                    subType: item.subType,
-                    formattedDate: this.formatDate(item.activityDate),
-                    iconName: this.getIconName( item.type, item.subType),
-                    iconClass:this.getIconClass( item.type, item.subType)
-                };
-            });
+                return { id: item.id, title: item.title, activityDate: item.activityDate, type: item.type, subType: item.subType, formattedDate: this.formatDate(item.activityDate), iconName: this.getIconName( item.type, item.subType), iconClass:this.getIconClass( item.type, item.subType)};});
             this.isLoading = false;
             return;
         }
@@ -92,59 +82,23 @@ export default class LoyaltyMemberJourney extends LightningElement {
     getIconName(type, subType) {
         const value =
             `${type || ''} ${subType || ''}`.toLowerCase();
-        if ( value.includes('signup') || value.includes('sign up') || value.includes('enroll') || value.includes('enrollment') || value.includes('join')) {
-            return 'utility:user';
-        }
-
-        if ( value.includes('gaming') || value.includes('game') || value.includes('play') ) {
-            return 'utility:success';
-        }
-
-        if ( value.includes('earn') || value.includes('accrual') || value.includes('point') || value.includes('credit')) {
-            return 'utility:chart';
-        }
-
-        if ( value.includes('redeem') || value.includes('redemption') || value.includes('voucher') || value.includes('reward')
-        ) {
-            return 'utility:gift';
-        }
-
-        if ( value.includes('tier') || value.includes('upgrade') || value.includes('classic') || value.includes('silver') || value.includes('gold')) {
-            return 'utility:favorite';
-        }
-
-        if ( value.includes('promotion') || value.includes('campaign') || value.includes('birthday')) {
-            return 'utility:announcement';
-        }
+        if ( value.includes('signup') || value.includes('sign up') || value.includes('enroll') || value.includes('enrollment') || value.includes('join')) return 'utility:user';
+        if ( value.includes('gaming') || value.includes('game') || value.includes('play') ) return 'utility:success';
+        if ( value.includes('earn') || value.includes('accrual') || value.includes('point') || value.includes('credit')) return 'utility:chart';
+        if ( value.includes('redeem') || value.includes('redemption') || value.includes('voucher') || value.includes('reward')) return 'utility:gift';
+        if ( value.includes('tier') || value.includes('upgrade') || value.includes('classic') || value.includes('silver') || value.includes('gold')) return 'utility:favorite';
+        if ( value.includes('promotion') || value.includes('campaign') || value.includes('birthday')) return 'utility:announcement';
         return 'utility:event';
     }
 
     getIconClass(type, subType) {
-        const value =
-            `${type || ''} ${subType || ''}`.toLowerCase();
-        if ( value.includes('signup') || value.includes('sign up') || value.includes('enroll') || value.includes('enrollment') || value.includes('join')) {
-            return 'timeline-circle join-circle';
-        }
-
-        if ( value.includes('gaming') || value.includes('game') || value.includes('play')) {
-            return 'timeline-circle gaming-circle';
-        }
-
-        if ( value.includes('earn') || value.includes('accrual') || value.includes('point') || value.includes('credit')) {
-            return 'timeline-circle earn-circle';
-        }
-
-        if ( value.includes('redeem') || value.includes('redemption') || value.includes('voucher') || value.includes('reward')) {
-            return 'timeline-circle reward-circle';
-        }
-
-        if ( value.includes('tier') || value.includes('upgrade') || value.includes('classic') || value.includes('silver') || value.includes('gold') ) {
-            return 'timeline-circle tier-circle';
-        }
-
-        if ( value.includes('promotion') || value.includes('campaign') || value.includes('birthday')) {
-            return 'timeline-circle promotion-circle';
-        }
+        const value = `${type || ''} ${subType || ''}`.toLowerCase();
+        if ( value.includes('signup') || value.includes('sign up') || value.includes('enroll') || value.includes('enrollment') || value.includes('join')) return 'timeline-circle join-circle';
+        if ( value.includes('gaming') || value.includes('game') || value.includes('play')) return 'timeline-circle gaming-circle';
+        if ( value.includes('earn') || value.includes('accrual') || value.includes('point') || value.includes('credit')) return 'timeline-circle earn-circle';
+        if ( value.includes('redeem') || value.includes('redemption') || value.includes('voucher') || value.includes('reward')) return 'timeline-circle reward-circle';        
+        if ( value.includes('tier') || value.includes('upgrade') || value.includes('classic') || value.includes('silver') || value.includes('gold') ) return 'timeline-circle tier-circle';
+        if ( value.includes('promotion') || value.includes('campaign') || value.includes('birthday')) return 'timeline-circle promotion-circle';
         return 'timeline-circle default-circle';
     }
 

@@ -83,20 +83,15 @@ export default class MemberProfileCard extends LightningElement {
 
     get segmentClass() {
         const segment = (this.member?.Segment__c || '').trim().toLowerCase();
-
         switch (segment) {
             case 'basic':
                 return 'segmentBadge Basic';
-
             case 'premium':
                 return 'segmentBadge Premium';
-
             case 'vvip':
                 return 'segmentBadge VVIP';
-
             case 'business':
                 return 'segmentBadge Business';
-
             default:
                 return 'segmentBadge default';
         }
@@ -113,110 +108,34 @@ export default class MemberProfileCard extends LightningElement {
     handleEdit() {
         this.isModalOpen = true;
         this.modalTitle = 'Edit Member Profile';
-
-        const preferredChannel = this.member?.Preferred_Channel__c
-            ? this.member.Preferred_Channel__c
-                  .split(';')
-                  .map(value => value.trim())
-                  .filter(value => value)
-            : [];
-
-        const preferredGame = this.member?.Preferred_Game__c
-            ? this.member.Preferred_Game__c
-                  .split(';')
-                  .map(value => value.trim())
-                  .filter(value => value)
-            : [];
-
-        this.editData = {
-            gamingSegment: this.member?.Segment__c || '',
-            preferredLanguage: this.member?.Preferred_Language__c || '',
-            preferredChannel,
-            nationality: this.member?.Nationality__c || '',
-            property: this.member?.Property__c || '',
-            preferredGame
-        };
+        const preferredChannel = this.member?.Preferred_Channel__c ? this.member.Preferred_Channel__c .split(';') .map(value => value.trim()) .filter(value => value) : [];
+        const preferredGame = this.member?.Preferred_Game__c ? this.member.Preferred_Game__c .split(';') .map(value => value.trim()) .filter(value => value) : [];
+        this.editData = { gamingSegment: this.member?.Segment__c || '', preferredLanguage: this.member?.Preferred_Language__c || '', preferredChannel, nationality: this.member?.Nationality__c || '', property: this.member?.Property__c || '', preferredGame};
     }
 
     handleFieldChange(event) {
         const field = event.target.dataset.field;
-
-        this.editData = {
-            ...this.editData,
-            [field]: event.detail?.value ?? event.target.value
-        };
+        this.editData = { ...this.editData, [field]: event.detail?.value ?? event.target.value};
     }
 
     handleChannelChange(event) {
-        this.editData = {
-            ...this.editData,
-            preferredChannel: event.detail.value
-        };
+        this.editData = { ...this.editData,preferredChannel: event.detail.value};
     }
 
     async handleSave() {
         try {
-            const preferredChannel = Array.isArray(this.editData.preferredChannel)
-                ? this.editData.preferredChannel.join(';')
-                : this.editData.preferredChannel || '';
-
-            const preferredGame = Array.isArray(this.editData.preferredGame)
-                ? this.editData.preferredGame.join(';')
-                : this.editData.preferredGame || '';
-
-            const updatedData = {
-                segment: this.editData.gamingSegment,
-                preferredLanguage: this.editData.preferredLanguage,
-                preferredChannel,
-                nationality: this.editData.nationality,
-                property: this.editData.property,
-                preferredGame
-            };
-
-            await updateMemberProfile({
-                memberId: this.member.Id,
-                segment: updatedData.segment,
-                preferredLanguage: updatedData.preferredLanguage,
-                preferredChannel: updatedData.preferredChannel,
-                nationality: updatedData.nationality,
-                property: updatedData.property,
-                preferredGame: updatedData.preferredGame
-            });
-
-            this.dispatchEvent(
-                new CustomEvent('segmentchange', {
-                    detail: updatedData,
-                    bubbles: true,
-                    composed: true
-                })
-            );
-
+            const preferredChannel = Array.isArray(this.editData.preferredChannel) ? this.editData.preferredChannel.join(';') : this.editData.preferredChannel || '';
+            const preferredGame = Array.isArray(this.editData.preferredGame) ? this.editData.preferredGame.join(';') : this.editData.preferredGame || '';
+            const updatedData = { segment: this.editData.gamingSegment, preferredLanguage: this.editData.preferredLanguage, preferredChannel, nationality: this.editData.nationality, property: this.editData.property, preferredGame};
+            await updateMemberProfile({ memberId: this.member.Id, segment: updatedData.segment, preferredLanguage: updatedData.preferredLanguage, preferredChannel: updatedData.preferredChannel, nationality: updatedData.nationality, property: updatedData.property, preferredGame: updatedData.preferredGame});
+            this.dispatchEvent(new CustomEvent('segmentchange', { detail: updatedData, bubbles: true, composed: true}));
             this.closeModal();
-
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: 'Success',
-                    message: 'Member Profile updated successfully.',
-                    variant: 'success'
-                })
-            );
+            this.dispatchEvent(new ShowToastEvent({ title: 'Success', message: 'Member Profile updated successfully.', variant: 'success'}));
         } catch (error) {
             let message = 'Unable to update Member Profile.';
-
-            if (error?.body?.message) {
-                message = error.body.message;
-            } else if (error?.message) {
-                message = error.message;
-            }
-
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: 'Update Failed',
-                    message,
-                    variant: 'error',
-                    mode: 'sticky'
-                })
-            );
+            if (error?.body?.message) message = error.body.message;
+            else if (error?.message) message = error.message;
+            this.dispatchEvent(new ShowToastEvent({ title: 'Update Failed', message, variant: 'error', mode: 'sticky'}));
         }
     }
 

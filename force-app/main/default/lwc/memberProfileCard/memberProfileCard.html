@@ -2,9 +2,7 @@
     <div class="summaryCard">
         <div class="cardHeader">
             <div class="headerLeft">
-                <div class="headerIcon profileIcon">
-                    <lightning-icon icon-name="standard:contact" alternative-text="Member Profile" size="x-small"></lightning-icon>
-                </div>
+                <div class="headerIcon profileIcon"><lightning-icon icon-name="standard:contact" alternative-text="Member Profile" size="x-small"></lightning-icon></div>
                 <h2>Member Profile</h2>
             </div>
             <button type="button" class="editButton" onclick={handleEdit}>Edit</button>
@@ -54,9 +52,7 @@
         <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="editModalHeading" class="slds-modal slds-fade-in-open">
             <div class="slds-modal__container">
                 <header class="slds-modal__header">
-                    <button type="button" class="closeButton" title="Close" onclick={handleCancel}>
-                        <lightning-icon icon-name="utility:close" alternative-text="Close" size="x-small"></lightning-icon>
-                    </button>
+                    <button type="button" class="closeButton" title="Close" onclick={handleCancel}><lightning-icon icon-name="utility:close" alternative-text="Close" size="x-small"></lightning-icon></button>
                     <h2 id="editModalHeading" class="modalTitle">{modalTitle}</h2>
                 </header>
                 <div class="slds-modal__content modalBody">

@@ -7,40 +7,29 @@
                 </div>
                 <h2 class="journey-title">Member Journey</h2>
             </div>
-
-            <button class="timeline-button" onclick={handleViewTimeline}>
-                View Timeline
-            </button>
+            <button class="timeline-button" onclick={handleViewTimeline}>View Timeline</button>
         </div>
-
         <div class="journey-body">
             <template if:true={isLoading}>
-                <div class="journey-loading">
-                    <lightning-spinner alternative-text="Loading member journey" size="small"></lightning-spinner>
-                </div>
+                <div class="journey-loading"><lightning-spinner alternative-text="Loading member journey" size="small"></lightning-spinner></div>
             </template>
-
             <template if:true={hasError}>
                 <div class="journey-empty">
                     <lightning-icon icon-name="utility:error" size="small"></lightning-icon>
                     <p>Unable to load journey activity.</p>
                 </div>
             </template>
-
             <template if:true={showEmpty}>
                 <div class="journey-empty">
                     <lightning-icon icon-name="utility:info" size="small"></lightning-icon>
                     <p>No journey activity is available for this member.</p>
                 </div>
             </template>
-
             <template if:true={hasJourney}>
                 <div class="timeline" style={timelineStyle}>
                     <template for:each={visibleJourney} for:item="item">
                         <div class="timeline-item" key={item.id}>
-                            <div class={item.iconClass}>
-                                <lightning-icon icon-name={item.iconName} size="x-small" variant="inverse"></lightning-icon>
-                            </div>
+                            <div class={item.iconClass}><lightning-icon icon-name={item.iconName} size="x-small" variant="inverse"></lightning-icon></div>
                             <div class="timeline-text">
                                 <div class="timeline-title">{item.title}</div>
                                 <div class="timeline-date">{item.formattedDate}</div>
@@ -51,25 +40,19 @@
             </template>
         </div>
     </div>
-
     <template if:true={showTimelineModal}>
         <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="timeline-modal-heading" class="slds-modal slds-fade-in-open">
             <div class="slds-modal__container">
                 <header class="slds-modal__header">
-                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={handleCloseTimeline}>
-                        <lightning-icon icon-name="utility:close" alternative-text="Close" size="small"></lightning-icon>
-                    </button>
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={handleCloseTimeline}><lightning-icon icon-name="utility:close" alternative-text="Close" size="small"></lightning-icon></button>
                     <h2 id="timeline-modal-heading" class="slds-text-heading_medium">Member Journey</h2>
                 </header>
-
                 <div class="slds-modal__content slds-p-around_medium">
                     <template if:true={hasJourney}>
                         <div class="modal-timeline">
                             <template for:each={journey} for:item="item">
                                 <div class="modal-timeline-item" key={item.id}>
-                                    <div class={item.iconClass}>
-                                        <lightning-icon icon-name={item.iconName} size="x-small" variant="inverse"></lightning-icon>
-                                    </div>
+                                    <div class={item.iconClass}><lightning-icon icon-name={item.iconName} size="x-small" variant="inverse"></lightning-icon></div>
                                     <div class="modal-timeline-text">
                                         <div class="timeline-title">{item.title}</div>
                                         <div class="timeline-date">{item.formattedDate}</div>
@@ -79,13 +62,9 @@
                         </div>
                     </template>
                 </div>
-
-                <footer class="slds-modal__footer">
-                    <button class="slds-button slds-button_neutral" onclick={handleCloseTimeline}>Close</button>
-                </footer>
+                <footer class="slds-modal__footer"><button class="slds-button slds-button_neutral" onclick={handleCloseTimeline}>Close</button></footer>
             </div>
         </section>
-
         <div class="slds-backdrop slds-backdrop_open"></div>
     </template>
 </template>

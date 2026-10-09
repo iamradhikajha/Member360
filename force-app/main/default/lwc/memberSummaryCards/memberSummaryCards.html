@@ -1,20 +1,9 @@
 <template>
     <template if:true={member}>
-
         <div class="cardsContainer">
-
-            <c-member-profile-card
-                member={member}>
-            </c-member-profile-card>
-
-            <c-loyalty-status-card
-                member={member}>
-            </c-loyalty-status-card>
-
-            <c-host-relationship-card>
-            </c-host-relationship-card>
-
+            <c-member-profile-card member={member}></c-member-profile-card>
+            <c-loyalty-status-card member={member}></c-loyalty-status-card>
+            <c-host-relationship-card></c-host-relationship-card>
         </div>
-
     </template>
 </template>

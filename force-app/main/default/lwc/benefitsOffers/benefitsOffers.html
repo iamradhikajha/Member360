@@ -7,42 +7,29 @@
             </div>
             <button type="button" class="viewAllButton" onclick={handleViewAll}>View All</button>
         </div>
-
         <div class="benefitsBody">
             <div class="benefitsColumn">
                 <div class="columnTitle availableTitle">Available Benefits</div>
-
                 <template if:true={hasAvailableBenefits}>
                     <div class="benefitsList">
                         <template for:each={availableBenefits} for:item="benefit">
                             <div key={benefit.memberBenefitId} class="benefitItem">
-                                <div class="benefitIcon">
-                                    <lightning-icon icon-name="utility:magicwand" alternative-text="Benefit" size="x-small"></lightning-icon>
-                                </div>
+                                <div class="benefitIcon"><lightning-icon icon-name="utility:magicwand" alternative-text="Benefit" size="x-small"></lightning-icon></div>
                                 <div class="benefitInfo">
                                     <div class="benefitName">{benefit.benefitName}</div>
                                     <div class="benefitExpiry">
-                                        <template if:true={benefit.endDate}>
-                                            Valid until {benefit.formattedEndDate}
-                                        </template>
-                                        <template if:false={benefit.endDate}>
-                                            No expiry date
-                                        </template>
+                                        <template if:true={benefit.endDate}>Valid until {benefit.formattedEndDate}</template>
+                                        <template if:false={benefit.endDate}>No expiry date</template>
                                     </div>
                                 </div>
                             </div>
                         </template>
                     </div>
                 </template>
-
-                <template if:false={hasAvailableBenefits}>
-                    <div class="emptyMessage">No available benefits</div>
-                </template>
+                <template if:false={hasAvailableBenefits}><div class="emptyMessage">No available benefits</div></template>
             </div>
-
             <div class="benefitsColumn expiringColumn">
                 <div class="columnTitle expiringTitle">Expiring Soon</div>
-
                 <template if:true={hasExpiringBenefits}>
                     <div class="benefitsList">
                         <template for:each={expiringBenefits} for:item="benefit">
@@ -58,14 +45,12 @@
                         </template>
                     </div>
                 </template>
-
                 <template if:false={hasExpiringBenefits}>
                     <div class="emptyMessage">No benefits expiring soon</div>
                 </template>
             </div>
         </div>
     </div>
-
     <template if:true={isModalOpen}>
         <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="benefitsModalHeading" class="slds-modal slds-fade-in-open">
             <div class="slds-modal__container">
@@ -75,7 +60,6 @@
                     </button>
                     <h2 id="benefitsModalHeading" class="modalTitle">Benefits &amp; Offers</h2>
                 </header>
-
                 <div class="slds-modal__content modalBody">
                     <template if:true={hasBenefits}>
                         <div class="modalBenefitsList">
@@ -90,18 +74,11 @@
                             </template>
                         </div>
                     </template>
-
-                    <template if:false={hasBenefits}>
-                        <div class="emptyMessage">No benefits available</div>
-                    </template>
+                    <template if:false={hasBenefits}><div class="emptyMessage">No benefits available</div></template>
                 </div>
-
-                <footer class="slds-modal__footer modalFooter">
-                    <button type="button" class="cancelButton" onclick={handleCloseModal}>Close</button>
-                </footer>
+                <footer class="slds-modal__footer modalFooter"><button type="button" class="cancelButton" onclick={handleCloseModal}>Close</button></footer>
             </div>
         </section>
-
         <div class="slds-backdrop slds-backdrop_open"></div>
     </template>
 </template>
